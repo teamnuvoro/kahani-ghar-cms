@@ -13,6 +13,7 @@ export interface Story {
   language: Language;
   release_date: string | null;
   is_published: boolean;
+  rank: number | null;
   created_at: string;
 }
 
@@ -35,6 +36,7 @@ export interface StoryInsert {
   language: Language;
   release_date?: string | null;
   is_published?: boolean;
+  rank?: number | null;
 }
 
 export interface StoryUpdate {
@@ -44,6 +46,7 @@ export interface StoryUpdate {
   language?: Language;
   release_date?: string | null;
   is_published?: boolean;
+  rank?: number | null;
 }
 
 export interface EpisodeInsert {

@@ -10,6 +10,7 @@ export default async function DashboardPage() {
   const { data: stories, error } = await supabase
     .from("stories")
     .select("*")
+    .order("rank", { ascending: true, nullsFirst: false })
     .order("created_at", { ascending: false });
 
   if (error) {

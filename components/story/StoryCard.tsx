@@ -46,9 +46,16 @@ export function StoryCard({ story, onToggleArchive }: StoryCardProps) {
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <h3 className="font-semibold text-lg line-clamp-2">{story.title}</h3>
-            <Badge variant="outline" className="mt-2">
-              {languageLabels[story.language] || story.language}
-            </Badge>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge variant="outline">
+                {languageLabels[story.language] || story.language}
+              </Badge>
+              {story.rank !== null && (
+                <Badge variant="secondary">
+                  Rank: {story.rank}
+                </Badge>
+              )}
+            </div>
           </div>
         </div>
       </CardHeader>

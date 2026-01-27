@@ -23,6 +23,7 @@ const storySchema = z.object({
   language: z.enum(["en", "hi", "ta"]),
   release_date: z.string().optional().nullable(),
   is_published: z.boolean().default(false),
+  rank: z.number().nullable().optional(),
 });
 
 type StoryFormData = z.infer<typeof storySchema>;
@@ -52,6 +53,7 @@ export function StoryForm({ story }: StoryFormProps) {
       language: (story?.language as Language) || "en",
       release_date: story?.release_date || null,
       is_published: story?.is_published || false,
+      rank: story?.rank ?? null,
     },
   });
 
@@ -68,6 +70,9 @@ export function StoryForm({ story }: StoryFormProps) {
     try {
       const supabase = createClient();
 
+      // Convert NaN to null for rank (when input is empty)
+      const rankValue = data.rank !== undefined && !isNaN(data.rank as number) ? data.rank : null;
+
       if (story) {
         // Update existing story
         const { error } = await supabase
@@ -79,6 +84,7 @@ export function StoryForm({ story }: StoryFormProps) {
             language: data.language,
             release_date: data.release_date || null,
             is_published: data.is_published,
+            rank: rankValue,
           })
           .eq("id", story.id);
 
@@ -97,6 +103,7 @@ export function StoryForm({ story }: StoryFormProps) {
           language: data.language,
           release_date: data.release_date || null,
           is_published: data.is_published,
+          rank: rankValue,
         });
 
         if (error) throw error;
@@ -177,6 +184,19 @@ export function StoryForm({ story }: StoryFormProps) {
           type="date"
           {...register("release_date")}
         />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="rank">Rank (for homepage ordering)</Label>
+        <Input
+          id="rank"
+          type="number"
+          placeholder="Leave empty for no rank"
+          {...register("rank", { valueAsNumber: true })}
+        />
+        <p className="text-sm text-muted-foreground">
+          Lower rank values appear first. Leave empty to exclude from ranking.
+        </p>
       </div>
 
       <div className="flex items-center space-x-2">
