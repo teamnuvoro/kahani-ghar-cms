@@ -14,6 +14,12 @@ export interface Story {
   release_date: string | null;
   is_published: boolean;
   rank: number | null;
+  is_banner: boolean;
+  is_new_launch: boolean;
+  banner_image_url: string | null;
+  tile_image_url: string | null;
+  homepage_rank: number | null;
+  new_launch_rank: number | null;
   created_at: string;
 }
 
@@ -37,6 +43,12 @@ export interface StoryInsert {
   release_date?: string | null;
   is_published?: boolean;
   rank?: number | null;
+  is_banner?: boolean;
+  is_new_launch?: boolean;
+  banner_image_url?: string | null;
+  tile_image_url?: string | null;
+  homepage_rank?: number | null;
+  new_launch_rank?: number | null;
 }
 
 export interface StoryUpdate {
@@ -47,6 +59,12 @@ export interface StoryUpdate {
   release_date?: string | null;
   is_published?: boolean;
   rank?: number | null;
+  is_banner?: boolean;
+  is_new_launch?: boolean;
+  banner_image_url?: string | null;
+  tile_image_url?: string | null;
+  homepage_rank?: number | null;
+  new_launch_rank?: number | null;
 }
 
 export interface EpisodeInsert {

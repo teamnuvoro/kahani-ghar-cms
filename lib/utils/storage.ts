@@ -10,7 +10,7 @@ function generateUUID(): string {
 
 export async function uploadImage(
   file: File,
-  folder: "covers" | "slides"
+  folder: "covers" | "slides" | "banners" | "tiles"
 ): Promise<string> {
   const supabase = createClient();
   const fileExt = file.name.split(".").pop();

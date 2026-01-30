@@ -11,7 +11,7 @@ import { Image as ImageIcon, X } from "lucide-react";
 interface ImageUploadProps {
   value?: string;
   onChange: (url: string) => void;
-  folder: "covers" | "slides";
+  folder: "covers" | "slides" | "banners" | "tiles";
   label?: string;
   required?: boolean;
 }
